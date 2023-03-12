@@ -1,19 +1,14 @@
-const data=require("../../data/db.json")
-function Tours (){
-return(
-<>
-{data.map((item)=>{
-    return(
-        <div key={item.id}>
-    <h3>{item.name}</h3>
-    <img src={item.image} alt={item.name}></img>
-    <hr></hr>
-</div>
-    )
-    
-
-})}
-</>
-)
+import Tour from "./tour/Tour";
+const data = require("../../data/db.json");
+function Tours() {
+  return (
+    <>
+      {data.map((item) => {
+        return (
+          <Tour key={item.id} id={item.id}/>
+        );
+      })}
+    </>
+  );
 }
-export default Tours; 
+export default Tours;
