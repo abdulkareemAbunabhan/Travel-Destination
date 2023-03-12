@@ -1,0 +1,8 @@
+.styleFoot{
+    display: flex;
+    background-color: aqua;
+    justify-content: space-around;
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+}
