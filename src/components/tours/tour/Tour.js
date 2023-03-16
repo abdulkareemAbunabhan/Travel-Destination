@@ -1,26 +1,49 @@
 import "./Tour.css";
+import TourDetails from "../../tourDetails/TourDetails";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-const data = require("../../../data/db.json");
+import { useState } from "react";
 
 function Tour(props) {
-  let res = data.filter((item) => {
-    if (item.id === props.id) {
-      return true;
-    } else {
-      return false;
-    }
-  })[0];
+  const [showFlag, setShowFlag] = useState(false);
+  const [itemData, setItemData] = useState({});
+
+  const modalRender = (param) => {
+    setItemData(param);
+    setShowFlag(true);
+  };
+
+  const handleClose = () => {
+    setShowFlag(false);
+  };
 
   return (
     <>
+      
       <Card>
+        <Card.Title>
+          <b>{props.item.name}</b>
+        </Card.Title>
+        <Card.Img
+          src={props.item.image}
+          variant="top"
+          style={{maxHeight:'220px'}}
+        />
         <Card.Body>
-          <Card.Title><b>{res.name}</b></Card.Title>
-          <Button variant="primary">More Details</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              modalRender(props.item);
+            }}
+          >
+            More Details
+          </Button>
+          <TourDetails
+            showFlag={showFlag}
+            handleClose={handleClose}
+            item={itemData}
+          />
         </Card.Body>
-        <Card.Img src={res.image} variant='top'></Card.Img>
-        <hr />
       </Card>
     </>
   );
